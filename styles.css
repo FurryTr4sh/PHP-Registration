@@ -1,0 +1,12 @@
+h1 {
+	padding-left: 1rem;
+}
+a {
+	text-decoration: unset;
+}
+a:hover {
+	text-decoration: underline;
+}
+.padding {
+	padding-left: 1em;
+}
