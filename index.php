@@ -1,5 +1,11 @@
 <?
 header('Content-Type: text/html; charset=utf-8');
+include 'DBconnect.php';
+
+if ($_GET['authsuccess'] == 1) {
+	echo "<span class='padding'>Добро пожаловать в лагерь Наварро! Итак, прибыло пополнение...</span>";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
