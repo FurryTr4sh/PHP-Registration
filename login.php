@@ -2,13 +2,32 @@
 header('Content-Type: text/html; charset=utf-8');
 include 'DBconnect.php';
 
-/*$query = "
+if ($_GET['justregistered']=1) {
+	echo "<span class='padding'>Вы успешно зарегистрировались!</span";
+}
 
-"
+$login = $_POST['login'];
+$password = $_POST['password'];
+
+$query = "
+	SELECT login, password
+	FROM `userdata`
+	WHERE login = '$login' AND password = '$password'
+";
+
+echo $query;
 
 if (isset($_POST['log-button'])) {
-	$dbh->exec($query);
-}*/
+	$result = $dbh->query($query);
+	$row = $result->fetch();
+
+	if ($row) {
+		
+	}
+	else {
+		echo "Введён неверный логин или пароль";
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +43,7 @@ if (isset($_POST['log-button'])) {
 		<h1>Форма авторизации</h1>
 
 		<div class="padding">
-			<form action="" method="post">
+			<form action="index.php" method="post">
 				<input type="text" name="login" placeholder="Введите логин">
 				<br><br>
 				<input type="password" name="password" placeholder="Введите пароль">
