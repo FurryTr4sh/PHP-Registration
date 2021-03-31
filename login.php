@@ -1,16 +1,17 @@
-<?
+<?php
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 include 'DBconnect.php';
 
-if ($_GET['justregistered'] == 1) {
+/*if ($_GET['justregistered'] == 1) {
 	echo "<span class='padding'>Вы успешно зарегистрировались!</span";
-}
+}*/
 
 $login = $_POST['login'];
 $password = $_POST['password'];
 
 $query = "
-	SELECT login, password
+	SELECT *
 	FROM `userdata`
 	WHERE login = '$login' AND password = '$password'
 ";
@@ -20,10 +21,13 @@ if (isset($_POST['log-button'])) {
 	$row = $result->fetch();
 
 	if ($row) {
-		header('Location: index.php?authsuccess=1');
+		$_SESSION['login']		  = $row['login'];
+		$_SESSION['username']	  = $row['username'];
+		$_SESSION['userlastname'] = $row['userlastname'];
+		header('Location: index.php');
 	}
 	else {
-		echo "Введён неверный логин или пароль";
+		echo "<span class='padding'>Введён неправильный логин или пароль</span>";
 	}
 }
 ?>

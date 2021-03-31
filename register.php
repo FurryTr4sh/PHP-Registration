@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 include 'DBconnect.php';
@@ -27,7 +27,8 @@ if (isset($_POST['reg-button']) && checkfield()) {
 	}
 	else {
 		$dbh->exec($query);
-		header('Location: login.php?justregistered=1');
+		echo "<span class='padding'>Вы успешно зарегистрировались!</span>";
+		/*header('Location: login.php?justregistered=1');*/
 	}
 }
 ?>

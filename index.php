@@ -1,10 +1,11 @@
-<?
+<?php
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 include 'DBconnect.php';
 
-if ($_GET['authsuccess'] == 1) {
+/*if ($_GET['authsuccess'] == 1) {
 	echo "<span class='padding'>Добро пожаловать в лагерь Наварро! Итак, прибыло пополнение...</span>";
-}
+}*/
 
 ?>
 <!DOCTYPE html>
@@ -20,10 +21,24 @@ if ($_GET['authsuccess'] == 1) {
 	<body>
 		<h1>Добро пожаловать на наш сайт!</h1>
 
-		<div class="padding">
-			<a href="login.php">Авторизоваться</a>
-			<br>
-			<a href="register.php">Регистрация</a>
-		</div>
+		<?php
+			if (isset($_SESSION['login'])) {
+				$username = $_SESSION['username'];
+				$userlastname = $_SESSION['userlastname'];
+
+			  echo "<div class='padding'>
+						<span>Добро пожаловать, $username $userlastname</span>
+						<br>
+						<a href='logout.php'>Выйти</a>
+					</div>";
+			}
+			else {
+			  echo "<div class='padding'>
+						<a href='login.php'>Авторизоваться</a>
+						<br>
+						<a href='register.php'>Регистрация</a>
+					</div>";
+			}
+		?>
 	</body>
 </html>
